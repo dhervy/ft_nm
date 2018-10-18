@@ -16,17 +16,21 @@ NAMEOTOOL = ft_otool
 CC = clang
 CFLAGS = -Wall -Werror -Wextra
 
-CPATH = srcs/
+NMPATH = srcs/nm/
+OTOOLPATH = srcs/otool/
 HPATH = includes/
 CFILESNM = \
 	main.c \
 	list.c \
 	list_64.c \
 	list_32.c \
+	list_32_cigam.c \
 	display.c \
 	nm.c \
 	handle_64.c \
 	handle_32.c \
+	handle_32_cigam.c \
+	handle_fat.c \
 	tools.c \
 	type.c \
 	bonus.c \
@@ -51,7 +55,7 @@ $(NAMENM): $(OBJNM)
 	$(CC) $(CFLAGS) $(OBJNM) -o$(NAMENM) -L libft -lft
 	@echo "Successful compilation! $(NAMENM)\n---"
 
-$(OPATHNM)%.o: $(CPATH)%.c includes/nmotool.h
+$(OPATHNM)%.o: $(NMPATH)%.c includes/nmotool.h
 	@mkdir -p $(OPATHNM)
 	$(CC) $(CFLAGS) -I inc -c -o $@ $<
 
@@ -61,7 +65,7 @@ $(NAMEOTOOL): $(OBJOTOOL)
 	$(CC) $(CFLAGS) $(OBJOTOOL) -o$(NAMEOTOOL) -L libft -lft
 	@echo "Successful compilation! $(NAMEOTOOL) \n---"
 
-$(OPATHOTOOL)%.o: $(CPATH)%.c includes/nmotool.h
+$(OPATHOTOOL)%.o: $(OTOOLPATH)%.c includes/nmotool.h
 	@mkdir -p $(OPATHOTOOL)
 	$(CC) $(CFLAGS) -I inc -c -o $@ $<
 
