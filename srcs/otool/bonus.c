@@ -1,11 +1,8 @@
 #include "../../includes/nmotool.h"
 
-void		write_bonus_erreur(char *str, int i)
+void		write_bonus_erreur(char *str)
 {
-	if (i == 0)
-		ft_putstr("ft_nm: Unknown command line argument '");
-	else if (i == 1)
-		ft_putstr("ft_otool: Unknown command line argument '");
+	ft_putstr("ft_otool: Unknown command line argument '");
 	ft_putstr(str);
 	ft_putendl("'.");
 	exit(-1);
@@ -33,10 +30,10 @@ void		parse_otool_bonus(t_all *all, char **av, int ac)
 				if (av[i][t] == 'd')
 					all->bonus_d = 1;
 				else
-					write_bonus_erreur(av[i], 1);
+					write_bonus_erreur(av[i]);
 			}
 			if (t == 1)
-				write_bonus_erreur(av[i], 1);
+				write_bonus_erreur(av[i]);
 		}
 	}
 }

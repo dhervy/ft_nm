@@ -32,14 +32,10 @@ int			find_my_arch(t_all *all)
 
 void		handle_fat_32_write(t_all *all, struct fat_arch *arch)
 {
-	if (!all->bonus_a)
-	{
-		ft_putstr("\n");
-		ft_putstr(all->name);
-        ft_putstr(" (for ");
-        ft_putstr("architecture ");
-        ft_putstr(find_cputype(all, swap32(arch->cputype)));
-	}
+	ft_putstr(all->name);
+	ft_putstr(" (");
+	ft_putstr("architecture ");
+	ft_putstr(find_cputype(all, swap32(arch->cputype)));
 	all->off = swap32(arch->offset);
 	all->magic_number = *(uint32_t*)((uintptr_t)all->ptr + all->off);
 }

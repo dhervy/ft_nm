@@ -18,7 +18,7 @@ int			otool_section_64_norm(t_all *all, struct load_command *load_command)
 		!ft_strcmp(section->segname, "__TEXT") && \
 		!ft_strcmp(section->sectname, "__text")))
 		{
-			affi_otool(all, section, NULL);
+			affi_otool_64(all, section);
 			return (1);
 		}
 		section_ptr += sizeof(struct section_64);

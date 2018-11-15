@@ -35,21 +35,13 @@ int file_handle(t_all *all, char *name)
 	}
 	all->name = name;
 	return(1);
+}
 
-
-void		ft_otool_norm(t_all *all)
+void		ft_otool_error(t_all *all)
 {
-	if ((unsigned int)(all->magic_number) == FAT_CIGAM)
-	{
-		all->cpu = 32;
-		// handle_fat_32(all);
-	}
-	else
-	{
-		ft_putstr_fd(all->name, 2);
-		ft_putendl_fd(" The file was not recognized as a valid object file", 2);
-		ft_putendl_fd("", 2);
-	}
+	ft_putstr_fd(all->name, 2);
+	ft_putendl_fd(" The file was not recognized as a valid object file", 2);
+	ft_putendl_fd("", 2);
 	return ;
 }
 
@@ -57,21 +49,27 @@ void		ft_otool(t_all *all)
 {
 	if ((unsigned int)(all->magic_number = *(int*)all->ptr) == MH_MAGIC_64)
 	{
-		all->cpu = 64;
 		ft_putstr(all->name);
 		ft_putendl(":");
 		handle_64(all);
 	}
 	else if ((unsigned int)(all->magic_number) == MH_MAGIC)
 	{
-		all->cpu = 32;
 		ft_putstr(all->name);
 		ft_putendl(":");
-		// handle_32(all);
+		handle_32(all);
 	}
+	else if ((unsigned int)(all->magic_number) == MH_CIGAM)
+	{
+		ft_putstr(all->name);
+		ft_putendl(":");
+		handle_32_cigam(all);
+	}
+	if ((unsigned int)(all->magic_number) == FAT_CIGAM)
+		handle_fat_32(all);
 	else
-		ft_otool_norm(all);
-}}
+		ft_otool_error(all);
+}
 
 int main(int ac, char **av)
 {
@@ -92,7 +90,7 @@ int main(int ac, char **av)
 	{
 		init_struct(&all);
 		if (file_handle(&all, av[i])) {
-			otool(&all);
+			ft_otool(&all);
 			if (munmap(all.ptr, all.file_stat.st_size) < 0)
 				ft_putendl_fd("Erreur (munmap) : fail.", 2);
 			if (all.fd >= 0)

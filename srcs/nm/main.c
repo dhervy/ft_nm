@@ -50,8 +50,8 @@ int main(int ac, char **av)
 
 	i = 0;
 	all.ac = ac;
-	init_struct_bonus(&all);
-	parse_nm_bonus_nm(&all, av, ac);
+	init_struct_bonus_nm(&all);
+	parse_nm_bonus(&all, av, ac);
 	while (++i < ac)
 	{
 		init_struct(&all);

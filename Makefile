@@ -37,6 +37,15 @@ CFILESNM = \
 
 CFILESOTOOL = \
 	main.c \
+	bonus.c \
+	handle_64.c \
+	handle_32.c \
+	handle_32_cigam.c \
+	display_64.c \
+	display_32.c \
+	display_32_cigam.c \
+	display_tools.c \
+	tools.c \
 
 OPATHNM = obj/nm/
 OPATHOTOOL = obj/otool/
@@ -47,7 +56,7 @@ OBJOTOOL = $(addprefix $(OPATHOTOOL), $(OFILESOTOOL))
 
 .PHONY: all clean fclean re
 
-all: $(NAMENM) #$(NAMEOTOOL)
+all: $(NAMENM) $(NAMEOTOOL)
 
 $(NAMENM): $(OBJNM)
 	@echo "Compiling \"$(NAMENM)\"..."

@@ -70,7 +70,7 @@ char		*llx(unsigned long long int value);
 int			bonus_p_sort(t_all *all, t_cmd **tmp, t_cmd **tmp2);
 void		parse_nm_bonus(t_all *all, char **av, int ac);
 void		init_struct_bonus_nm(t_all *all);
-void		write_bonus_erreur(char *str, int i);
+void		write_bonus_erreur(char *str);
 void		init_add_list(t_cmd **begin, t_cmd **tmp, t_cmd **tmp2, t_cmd **tmp3);
 int			shearch_same_name(t_cmd **begin, t_cmd *this);
 void		sort_lst(t_cmd **begin, t_cmd **tmp, t_cmd **tmp2, t_cmd **tmp3);
@@ -90,5 +90,13 @@ char		*find_cputype(t_all *all, int nb);
 
 void		parse_otool_bonus(t_all *all, char **av, int ac);
 void		init_struct_bonus_otool(t_all *all);
+void		affi_otool_64(t_all *all, struct section_64 *section_64);
+void		affi_otool_32(t_all *all, struct section *section);
+void		otool_section_32(t_all *all);
+void		affi_otool_pad(t_all *all, int *pad);
+void		affi_otool_nb(int pad);
+void		affi_otool_32_cigam(t_all *all, struct section *section);
+void 		handle_32_cigam(t_all *all);
+
 
 #endif
