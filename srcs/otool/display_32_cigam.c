@@ -1,13 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   display_32_cigam.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhervy <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/16 18:20:47 by dhervy            #+#    #+#             */
+/*   Updated: 2018/11/16 18:20:48 by dhervy           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/nmotool.h"
 
-void		affi_otool_addr_32_cigam(t_all *all, char *ptr, struct section *section)
+void	affi_otool_addr_32_cigam(t_all *all, char *ptr, struct section *section)
 {
 	char	*res;
 	int		i;
 
 	res = NULL;
 	i = -1;
-	res = llx(swap32(section->addr) + (ptr - (all->ptr + swap32(section->offset) + all->off)));
+	res = llx(swap32(section->addr) +\
+		(ptr - (all->ptr + swap32(section->offset) + all->off)));
 	while ((ft_strlen(res) + ++i) < 8)
 		ft_putchar('0');
 	ft_putstr(res);
@@ -15,7 +28,7 @@ void		affi_otool_addr_32_cigam(t_all *all, char *ptr, struct section *section)
 	ft_putstr("\t");
 }
 
-void		affi_otool_norm_32_cigam(char *ptr)
+void	affi_otool_norm_32_cigam(char *ptr)
 {
 	char			*tmp;
 	char			*res;
@@ -36,7 +49,7 @@ void		affi_otool_norm_32_cigam(char *ptr)
 	free(res);
 }
 
-char		*affi_otool_ptr_32_cigam(t_all *all, struct section *section)
+char	*affi_otool_ptr_32_cigam(t_all *all, struct section *section)
 {
 	if (all->bonus_d)
 		ft_putendl("Contents of (__DATA,__data) section");
@@ -45,7 +58,7 @@ char		*affi_otool_ptr_32_cigam(t_all *all, struct section *section)
 	return ((char*)(all->ptr) + swap32(section->offset) + all->off);
 }
 
-void		affi_otool_32_cigam(t_all *all, struct section *section)
+void	affi_otool_32_cigam(t_all *all, struct section *section)
 {
 	char			*ptr;
 	uint64_t		i;

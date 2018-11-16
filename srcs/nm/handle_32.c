@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_32.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhervy <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/16 18:17:50 by dhervy            #+#    #+#             */
+/*   Updated: 2018/11/16 18:17:52 by dhervy           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/nmotool.h"
 
 void		insert_output_32(t_all *all, int nsyms, int symoff, int stroff)
@@ -20,7 +32,7 @@ void		insert_output_32(t_all *all, int nsyms, int symoff, int stroff)
 	display_lst(&cmds, all);
 }
 
-void	find_type_32(t_all *all, t_cmd *cmd, struct nlist *element)
+void		find_type_32(t_all *all, t_cmd *cmd, struct nlist *element)
 {
 	all->cpu = all->cpu;
 	if ((element->n_type & N_TYPE) == N_UNDF)
@@ -31,12 +43,11 @@ void	find_type_32(t_all *all, t_cmd *cmd, struct nlist *element)
 		cmd->type = ft_strdup(element->n_type & N_EXT ? "I" : "i");
 	else if ((element->n_type & N_TYPE) == N_SECT)
 		cmd->type = handle_32_findsec(all, element);
-	else {
+	else
 		cmd->type = ft_strdup("?");
-	}
 }
 
-void	handle_32(t_all *all)
+void		handle_32(t_all *all)
 {
 	struct mach_header		*header;
 	struct load_command		*lc;
@@ -62,7 +73,7 @@ void	handle_32(t_all *all)
 	}
 }
 
-char	*handle_32_findsec_norm(struct nlist *element,\
+char		*handle_32_findsec_norm(struct nlist *element,\
 	struct load_command *load_command, int *nsec)
 {
 	struct segment_command	*seg_command;
@@ -77,15 +88,17 @@ char	*handle_32_findsec_norm(struct nlist *element,\
 	{
 		sectio = (struct section *)section_ptr;
 		if (*nsec == element->n_sect)
-			return (all_type(sectio->segname, sectio->sectname, element->n_type));
+		{
+			return (all_type(sectio->segname,\
+			sectio->sectname, element->n_type));
+		}
 		section_ptr += sizeof(struct section);
 		(*nsec)++;
 	}
 	return (NULL);
 }
 
-
-char	*handle_32_findsec(t_all *all, struct nlist *element)
+char		*handle_32_findsec(t_all *all, struct nlist *element)
 {
 	struct mach_header		*mach_header;
 	struct load_command		*load_command;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   display.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhervy <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/16 18:17:44 by dhervy            #+#    #+#             */
+/*   Updated: 2018/11/16 18:17:47 by dhervy           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/nmotool.h"
 
 void		display_name(t_all *all)
@@ -50,7 +62,7 @@ void		display_lst_norm(t_cmd *tmp)
 	ft_putchar('\n');
 }
 
-void	display_reverse(t_cmd *tmp, t_all *all)
+void		display_reverse(t_cmd *tmp, t_all *all)
 {
 	if (tmp && tmp->next)
 		display_reverse(tmp->next, all);
@@ -82,5 +94,5 @@ void		display_lst(t_cmd **cmds, t_all *all)
 			tmp = tmp->next;
 		}
 	}
-	// free_lst(cmds);
+	free_lst(cmds);
 }

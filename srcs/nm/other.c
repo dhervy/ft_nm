@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_tools.c                                    :+:      :+:    :+:   */
+/*   other.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dhervy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/16 18:20:54 by dhervy            #+#    #+#             */
-/*   Updated: 2018/11/16 18:20:55 by dhervy           ###   ########.fr       */
+/*   Created: 2018/11/16 19:05:56 by dhervy            #+#    #+#             */
+/*   Updated: 2018/11/16 19:05:59 by dhervy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/nmotool.h"
 
-void		affi_otool_nb(int pad)
+int		find_my_arch_norm(t_all *all)
 {
-	if (pad != 16)
-		ft_putchar('\n');
-}
-
-void		affi_otool_pad(t_all *all, int *pad)
-{
-	(*pad)++;
-	if (!all->arch_ppc || !((*pad) % 4))
-		ft_putchar(' ');
-	if ((*pad) == 16)
-		ft_putchar('\n');
+	handle_64(all);
+	return (1);
 }

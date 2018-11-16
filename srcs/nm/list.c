@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhervy <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/16 18:18:16 by dhervy            #+#    #+#             */
+/*   Updated: 2018/11/16 18:18:18 by dhervy           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/nmotool.h"
 
 void	init_add_list(t_cmd **begin, t_cmd **tmp, t_cmd **tmp2, t_cmd **tmp3)
@@ -7,7 +19,7 @@ void	init_add_list(t_cmd **begin, t_cmd **tmp, t_cmd **tmp2, t_cmd **tmp3)
 	*tmp = *begin;
 }
 
-void		sort_lst(t_cmd **begin, t_cmd **tmp, t_cmd **tmp2, t_cmd **tmp3)
+void	sort_lst(t_cmd **begin, t_cmd **tmp, t_cmd **tmp2, t_cmd **tmp3)
 {
 	(*tmp2)->next = *tmp;
 	if (*tmp3 == NULL)
@@ -16,19 +28,19 @@ void		sort_lst(t_cmd **begin, t_cmd **tmp, t_cmd **tmp2, t_cmd **tmp3)
 		(*tmp3)->next = *tmp2;
 }
 
-void		sort_lst2(t_cmd **tmp, t_cmd **tmp2)
+void	sort_lst2(t_cmd **tmp, t_cmd **tmp2)
 {
 	(*tmp2)->next = !(*tmp)->next ? NULL : (*tmp)->next;
 	(*tmp)->next = *tmp2;
 }
 
-void		init_shearch_same_name(t_cmd **begin, t_cmd **tmp, t_cmd **tmp2)
+void	init_shearch_same_name(t_cmd **begin, t_cmd **tmp, t_cmd **tmp2)
 {
 	(*tmp) = *begin;
 	(*tmp2) = NULL;
 }
 
-int			shearch_same_name(t_cmd **begin, t_cmd *this)
+int		shearch_same_name(t_cmd **begin, t_cmd *this)
 {
 	t_cmd	*tmp;
 	t_cmd	*tmp2;

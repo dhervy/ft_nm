@@ -1,10 +1,16 @@
-#include "../../includes/nmotool.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_fat.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhervy <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/16 18:18:07 by dhervy            #+#    #+#             */
+/*   Updated: 2018/11/16 18:18:09 by dhervy           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int			find_my_arch_norm(t_all *all)
-{
-	handle_64(all);
-	return (1);
-}
+#include "../../includes/nmotool.h"
 
 int			find_my_arch(t_all *all)
 {
@@ -36,9 +42,9 @@ void		handle_fat_32_write(t_all *all, struct fat_arch *arch)
 	{
 		ft_putstr("\n");
 		ft_putstr(all->name);
-        ft_putstr(" (for ");
-        ft_putstr("architecture ");
-        ft_putstr(find_cputype(all, swap32(arch->cputype)));
+		ft_putstr(" (for ");
+		ft_putstr("architecture ");
+		ft_putstr(find_cputype(all, swap32(arch->cputype)));
 	}
 	all->off = swap32(arch->offset);
 	all->magic_number = *(uint32_t*)((uintptr_t)all->ptr + all->off);
@@ -74,7 +80,7 @@ void		handle_fat_32(t_all *all)
 	void				*arch_ptr;
 	int					i;
 
-    all->cpu = 32;
+	all->cpu = 32;
 	if (handle_fat_32_init(all, &header, &nbheader) == 1)
 		return ;
 	i = -1;

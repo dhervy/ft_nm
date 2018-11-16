@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_32_cigam.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhervy <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/16 18:21:02 by dhervy            #+#    #+#             */
+/*   Updated: 2018/11/16 18:21:03 by dhervy           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/nmotool.h"
 
-int			otool_section_32_cigam_norm(t_all *all, struct load_command *load_command)
+int		otool_section_32_cigam_norm(t_all *all,\
+	struct load_command *load_command)
 {
 	struct segment_command	*seg_command;
 	void					*section_ptr;
@@ -26,7 +39,7 @@ int			otool_section_32_cigam_norm(t_all *all, struct load_command *load_command)
 	return (0);
 }
 
-void		otool_section_32_cigam(t_all *all)
+void	otool_section_32_cigam(t_all *all)
 {
 	struct load_command		*load_command;
 	struct mach_header		*mach_header;
@@ -41,17 +54,17 @@ void		otool_section_32_cigam(t_all *all)
 		load_command = (struct load_command *)((uint8_t *)mach_header\
 		+ segment_offset);
 		if (swap32(load_command->cmd) == LC_SEGMENT)
-			if (otool_section_32_norm(all, load_command) == 1)
+			if (otool_section_32_cigam_norm(all, load_command) == 1)
 				return ;
 		segment_offset += swap32(load_command->cmdsize);
 	}
 	return ;
 }
 
-void handle_32_cigam(t_all *all)
+void	handle_32_cigam(t_all *all)
 {
 	int						i;
-	struct mach_header	*header;
+	struct mach_header		*header;
 	struct load_command		*lc;
 	struct symtab_command	*sym;
 
@@ -66,11 +79,11 @@ void handle_32_cigam(t_all *all)
 			return ;
 		if (swap32(lc->cmd) == LC_SYMTAB)
 		{
-			sym = (struct symtab_command *) lc;
+			sym = (struct symtab_command *)lc;
 			all->stroff = (void*)all->ptr + swap32(sym->stroff) + all->off;
 			otool_section_32_cigam(all);
 		}
-		lc = (void *) lc + lc->cmdsize;
+		lc = (void *)lc + swap32(lc->cmdsize);
 		i++;
 	}
 }

@@ -1,13 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   display_64.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhervy <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/16 18:20:51 by dhervy            #+#    #+#             */
+/*   Updated: 2018/11/16 18:20:52 by dhervy           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/nmotool.h"
 
-void		affi_otool_addr_64(t_all *all, char *ptr, struct section_64 *section_64)
+void	affi_otool_addr_64(t_all *all, char *ptr, struct section_64 *section_64)
 {
 	char	*res;
 	int		i;
 
 	res = NULL;
 	i = -1;
-	res = llx(section_64->addr + (ptr - (all->ptr + section_64->offset + all->off)));
+	res = llx(section_64->addr +\
+		(ptr - (all->ptr + section_64->offset + all->off)));
 	while ((ft_strlen(res) + ++i) < 16)
 		ft_putchar('0');
 	ft_putstr(res);
@@ -15,7 +28,7 @@ void		affi_otool_addr_64(t_all *all, char *ptr, struct section_64 *section_64)
 	ft_putstr("\t");
 }
 
-void		affi_otool_norm_64(char *ptr)
+void	affi_otool_norm_64(char *ptr)
 {
 	char			*tmp;
 	char			*res;
@@ -36,7 +49,7 @@ void		affi_otool_norm_64(char *ptr)
 	free(res);
 }
 
-char		*affi_otool_ptr_64(t_all *all, struct section_64 *section_64)
+char	*affi_otool_ptr_64(t_all *all, struct section_64 *section_64)
 {
 	if (all->bonus_d)
 		ft_putendl("Contents of (__DATA,__data) section");
@@ -45,7 +58,7 @@ char		*affi_otool_ptr_64(t_all *all, struct section_64 *section_64)
 	return ((char*)(all->ptr) + section_64->offset + all->off);
 }
 
-void		affi_otool_64(t_all *all, struct section_64 *section_64)
+void	affi_otool_64(t_all *all, struct section_64 *section_64)
 {
 	char			*ptr;
 	uint64_t		i;

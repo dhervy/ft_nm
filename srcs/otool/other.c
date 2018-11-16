@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_tools.c                                    :+:      :+:    :+:   */
+/*   other.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dhervy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/16 18:20:54 by dhervy            #+#    #+#             */
-/*   Updated: 2018/11/16 18:20:55 by dhervy           ###   ########.fr       */
+/*   Created: 2018/11/16 19:38:45 by dhervy            #+#    #+#             */
+/*   Updated: 2018/11/16 19:42:28 by dhervy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/nmotool.h"
 
-void		affi_otool_nb(int pad)
+void	print_name(t_all *all)
 {
-	if (pad != 16)
-		ft_putchar('\n');
+	ft_putstr(all->name);
+	ft_putendl(":");
 }
 
-void		affi_otool_pad(t_all *all, int *pad)
+int		handle_fat_32_init(t_all *all, struct fat_header **header,\
+		int *nbheader)
 {
-	(*pad)++;
-	if (!all->arch_ppc || !((*pad) % 4))
-		ft_putchar(' ');
-	if ((*pad) == 16)
-		ft_putchar('\n');
+	*header = (struct fat_header *)all->ptr;
+	*nbheader = swap32((*header)->nfat_arch);
+	if (find_my_arch(all) == 1)
+		return (1);
+	return (0);
 }

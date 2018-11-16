@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_64.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhervy <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/16 18:21:07 by dhervy            #+#    #+#             */
+/*   Updated: 2018/11/16 18:21:08 by dhervy           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/nmotool.h"
 
-int			otool_section_64_norm(t_all *all, struct load_command *load_command)
+int		otool_section_64_norm(t_all *all, struct load_command *load_command)
 {
 	struct segment_command_64	*seg_command;
 	void						*section_ptr;
@@ -26,7 +38,7 @@ int			otool_section_64_norm(t_all *all, struct load_command *load_command)
 	return (0);
 }
 
-void		otool_section_64(t_all *all)
+void	otool_section_64(t_all *all)
 {
 	struct load_command			*load_command;
 	struct mach_header_64		*mach_header;
@@ -48,7 +60,7 @@ void		otool_section_64(t_all *all)
 	return ;
 }
 
-void handle_64(t_all *all)
+void	handle_64(t_all *all)
 {
 	int						i;
 	struct mach_header_64	*header;
@@ -66,11 +78,11 @@ void handle_64(t_all *all)
 			return ;
 		if (lc->cmd == LC_SYMTAB)
 		{
-			sym = (struct symtab_command *) lc;
+			sym = (struct symtab_command *)lc;
 			all->stroff = (void*)all->ptr + sym->stroff + all->off;
 			otool_section_64(all);
 		}
-		lc = (void *) lc + lc->cmdsize;
+		lc = (void *)lc + lc->cmdsize;
 		i++;
 	}
 }

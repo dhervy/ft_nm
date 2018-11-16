@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_32_cigam.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhervy <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/16 18:17:56 by dhervy            #+#    #+#             */
+/*   Updated: 2018/11/16 18:17:57 by dhervy           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/nmotool.h"
 
 void	find_type_32_cigam(t_all *all, t_cmd *cmd, struct nlist *element)
@@ -11,12 +23,11 @@ void	find_type_32_cigam(t_all *all, t_cmd *cmd, struct nlist *element)
 		cmd->type = ft_strdup(element->n_type & N_EXT ? "I" : "i");
 	else if ((element->n_type & N_TYPE) == N_SECT)
 		cmd->type = handle_32_cigam_findsec(all, element);
-	else {
+	else
 		cmd->type = ft_strdup("?");
-	}
 }
 
-void		insert_output_32_cigam(t_all *all, int nsyms, int symoff, int stroff)
+void	insert_output_32_cigam(t_all *all, int nsyms, int symoff, int stroff)
 {
 	t_cmd			*cmds;
 	int				i;
@@ -36,7 +47,7 @@ void		insert_output_32_cigam(t_all *all, int nsyms, int symoff, int stroff)
 	display_lst(&cmds, all);
 }
 
-void		handle_32_cigam(t_all *all)
+void	handle_32_cigam(t_all *all)
 {
 	struct mach_header		*header;
 	struct load_command		*lc;
@@ -44,7 +55,7 @@ void		handle_32_cigam(t_all *all)
 	int						i;
 
 	i = 0;
-    all->cpu = 32;
+	all->cpu = 32;
 	all->cigam = 1;
 	header = (struct mach_header *)((uintptr_t)all->ptr + all->off);
 	all->ncmds = swap32(header->ncmds);
@@ -56,11 +67,12 @@ void		handle_32_cigam(t_all *all)
 		if (swap32(lc->cmd) == LC_SYMTAB)
 		{
 			sym = (struct symtab_command *)lc;
-			insert_output_32_cigam(all, swap32(sym->nsyms), swap32(sym->symoff), swap32(sym->stroff));
+			insert_output_32_cigam(all, swap32(sym->nsyms),\
+				swap32(sym->symoff), swap32(sym->stroff));
 			break ;
 		}
 		lc = (void *)lc + swap32(lc->cmdsize);
-        i++;
+		i++;
 	}
 }
 
@@ -79,13 +91,15 @@ char	*handle_32_cigam_findsec_norm(struct nlist *element,\
 	{
 		sectio = (struct section *)section_ptr;
 		if (*nsec == element->n_sect)
-			return (all_type(sectio->segname, sectio->sectname, element->n_type));
+		{
+			return (all_type(sectio->segname,\
+				sectio->sectname, element->n_type));
+		}
 		section_ptr += sizeof(struct section);
 		(*nsec)++;
 	}
 	return (NULL);
 }
-
 
 char	*handle_32_cigam_findsec(t_all *all, struct nlist *element)
 {

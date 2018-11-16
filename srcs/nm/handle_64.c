@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_64.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhervy <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/16 18:18:00 by dhervy            #+#    #+#             */
+/*   Updated: 2018/11/16 18:18:02 by dhervy           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/nmotool.h"
 
-void insert_output_64(t_all *all, int nsyms, int symoff, int stroff)
+void	insert_output_64(t_all *all, int nsyms, int symoff, int stroff)
 {
 	t_cmd			*cmds;
 	int				i;
@@ -31,12 +43,11 @@ void	find_type_64(t_all *all, t_cmd *cmd, struct nlist_64 *element)
 		cmd->type = ft_strdup(element->n_type & N_EXT ? "I" : "i");
 	else if ((element->n_type & N_TYPE) == N_SECT)
 		cmd->type = handle_64_findsec(all, element);
-	else {
+	else
 		cmd->type = ft_strdup("?");
-	}
 }
 
-void handle_64(t_all *all)
+void	handle_64(t_all *all)
 {
 	int						i;
 	struct mach_header_64	*header;
@@ -54,10 +65,10 @@ void handle_64(t_all *all)
 			return ;
 		if (lc->cmd == LC_SYMTAB)
 		{
-			sym = (struct symtab_command *) lc;
+			sym = (struct symtab_command *)lc;
 			insert_output_64(all, sym->nsyms, sym->symoff, sym->stroff);
 		}
-		lc = (void *) lc + lc->cmdsize;
+		lc = (void *)lc + lc->cmdsize;
 		i++;
 	}
 }
@@ -77,7 +88,10 @@ char	*handle_64_findsec_norm(struct nlist_64 *element,\
 	{
 		sectio = (struct section_64 *)section_ptr;
 		if ((*nsec) == element->n_sect)
-			return (all_type(sectio->segname, sectio->sectname, element->n_type));
+		{
+			return (all_type(sectio->segname,\
+			sectio->sectname, element->n_type));
+		}
 		section_ptr += sizeof(struct section_64);
 		(*nsec)++;
 	}

@@ -34,6 +34,7 @@ CFILESNM = \
 	tools.c \
 	type.c \
 	bonus.c \
+	other.c \
 
 CFILESOTOOL = \
 	main.c \
@@ -41,6 +42,7 @@ CFILESOTOOL = \
 	handle_64.c \
 	handle_32.c \
 	handle_32_cigam.c \
+	handle_fat.c \
 	display_64.c \
 	display_32.c \
 	display_32_cigam.c \

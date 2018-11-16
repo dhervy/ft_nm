@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_32_cigam.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhervy <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/16 18:18:34 by dhervy            #+#    #+#             */
+/*   Updated: 2018/11/16 18:18:35 by dhervy           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/nmotool.h"
 
 int		first_add_list_32_cigam(t_cmd **begin, t_all *all, struct nlist *nlist)
@@ -19,7 +31,7 @@ int		init_add_list_32_cigam(t_cmd **begin, struct nlist *nlist, t_all *all)
 	return (0);
 }
 
-void		add_list_32_cigam(t_cmd **begin, struct nlist *nlist, t_all *all)
+void	add_list_32_cigam(t_cmd **begin, struct nlist *nlist, t_all *all)
 {
 	t_cmd	*tmp;
 	t_cmd	*tmp2;
